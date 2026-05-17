@@ -31,6 +31,9 @@ const projects = [
       "JWT middleware protecting all admin routes; deployed on Vercel with production CORS config",
     ],
     liveUrl: "https://dapursybilla.vercel.app/",
+    demoUrl: "YOUR_DEMO_VIDEO_URL",
+    caseStudyUrl:
+      "https://medium.com/@maliarrayandeveloper/membangun-website-katalog-umkm-dari-nol-studi-kasus-dapursybilla-6bd6cd9e996e",
     isPrivate: true,
   },
   {
@@ -193,8 +196,7 @@ function FeaturedProject({ p, visible }) {
               ▶ Watch Demo
             </a>
           )}
-          {p.caseStudyUrl !==
-            "https://medium.com/@maliarrayandeveloper/membangun-website-katalog-umkm-dari-nol-studi-kasus-dapursybilla-6bd6cd9e996e" && (
+          {p.caseStudyUrl && (
             <a
               href={p.caseStudyUrl}
               target="_blank"
