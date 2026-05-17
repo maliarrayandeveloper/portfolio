@@ -60,7 +60,8 @@ const projects = [
     ],
     liveUrl:
       "https://katalog-undangan-digital.vercel.app/?to=Juliet&theme=floral",
-    githubUrl: "https://github.com/maliarrayandeveloper/katalog-undangan-digital",
+    githubUrl:
+      "https://github.com/maliarrayandeveloper/katalog-undangan-digital",
     isPrivate: false,
   },
 ];
@@ -192,7 +193,8 @@ function FeaturedProject({ p, visible }) {
               ▶ Watch Demo
             </a>
           )}
-          {p.caseStudyUrl !== "YOUR_CASE_STUDY_URL" && (
+          {p.caseStudyUrl !==
+            "https://medium.com/@maliarrayandeveloper/membangun-website-katalog-umkm-dari-nol-studi-kasus-dapursybilla-6bd6cd9e996e" && (
             <a
               href={p.caseStudyUrl}
               target="_blank"
