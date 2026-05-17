@@ -30,7 +30,7 @@ export default function Navbar() {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       >
-        <span className={styles.logoName}>Muhammad Ali Arrayyan Bukhori</span>
+        <span className={styles.logoName}>Ali Arrayyan</span>
         <span className={styles.logoDot}>.</span>
       </a>
 
@@ -42,7 +42,7 @@ export default function Navbar() {
           </button>
         ))}
         <a
-          href="https://drive.google.com/file/d/1EphlW8xzhW-USZFLs-kVVku3FI-n0uI7/view?usp=sharing"
+          href="https://drive.google.com/file/d/1E0sQJ7X7dK3KCtjXy6afHzkDKTxrdWYv/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.cta}
@@ -75,7 +75,7 @@ export default function Navbar() {
             </button>
           ))}
           <a
-            href="YOUR_CV_LINK_HERE"
+            href="https://drive.google.com/file/d/1E0sQJ7X7dK3KCtjXy6afHzkDKTxrdWYv/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.mobileCta}

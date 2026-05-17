@@ -93,7 +93,7 @@ export default function Hero() {
             View My Work
           </button>
           <a
-            href="https://drive.google.com/file/d/1EphlW8xzhW-USZFLs-kVVku3FI-n0uI7/view?usp=sharing"
+            href="https://drive.google.com/file/d/1E0sQJ7X7dK3KCtjXy6afHzkDKTxrdWYv/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.btnSecondary}

@@ -31,8 +31,6 @@ const projects = [
       "JWT middleware protecting all admin routes; deployed on Vercel with production CORS config",
     ],
     liveUrl: "https://dapursybilla.vercel.app/",
-    demoUrl: "YOUR_DEMO_VIDEO_URL",
-    caseStudyUrl: "YOUR_CASE_STUDY_URL",
     isPrivate: true,
   },
   {
@@ -62,7 +60,7 @@ const projects = [
     ],
     liveUrl:
       "https://katalog-undangan-digital.vercel.app/?to=Juliet&theme=floral",
-    githubUrl: "YOUR_GITHUB_REPO_URL",
+    githubUrl: "https://github.com/maliarrayandeveloper/katalog-undangan-digital",
     isPrivate: false,
   },
 ];
