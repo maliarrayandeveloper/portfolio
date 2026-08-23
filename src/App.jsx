@@ -3,6 +3,8 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Projects from './components/Projects'
+import HowItWorks from './components/HowItWorks'
+import FAQ from './components/FAQ'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
@@ -50,6 +52,8 @@ export default function App() {
         <Hero />
         <About />
         <Projects />
+        <HowItWorks />
+        <FAQ />
         <Contact />
       </main>
 

@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
 
-const links = ["About", "Projects", "Contact"];
+const links = [
+  { label: "About", id: "about" },
+  { label: "Projects", id: "projects" },
+  { label: "Process", id: "how-it-works" },
+  { label: "FAQ", id: "faq" },
+  { label: "Contact", id: "contact" },
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -15,9 +21,7 @@ export default function Navbar() {
 
   const scrollTo = (id) => {
     setMenuOpen(false);
-    document
-      .getElementById(id.toLowerCase())
-      ?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -37,8 +41,12 @@ export default function Navbar() {
       {/* Desktop links */}
       <nav className={styles.links}>
         {links.map((l) => (
-          <button key={l} className={styles.link} onClick={() => scrollTo(l)}>
-            {l}
+          <button
+            key={l.id}
+            className={styles.link}
+            onClick={() => scrollTo(l.id)}
+          >
+            {l.label}
           </button>
         ))}
         <a
@@ -67,11 +75,11 @@ export default function Navbar() {
         <div className={styles.mobileMenu}>
           {links.map((l) => (
             <button
-              key={l}
+              key={l.id}
               className={styles.mobileLink}
-              onClick={() => scrollTo(l)}
+              onClick={() => scrollTo(l.id)}
             >
-              {l}
+              {l.label}
             </button>
           ))}
           <a
