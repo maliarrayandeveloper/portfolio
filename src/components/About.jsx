@@ -1,105 +1,78 @@
-import { useEffect, useRef, useState } from 'react'
-import styles from './About.module.css'
+import { motion } from "framer-motion";
 
-const skills = [
-  { name: 'React', level: 90 },
-  { name: 'Node.js', level: 85 },
-  { name: 'MongoDB', level: 80 },
-  { name: 'Express.js', level: 82 },
-  { name: 'JavaScript', level: 92 },
-  { name: 'REST API Design', level: 78 },
-]
-
-function SkillBar({ name, level, visible }) {
-  return (
-    <div className={styles.skillItem}>
-      <div className={styles.skillTop}>
-        <span className={styles.skillName}>{name}</span>
-        <span className={styles.skillPct}>{level}%</span>
-      </div>
-      <div className={styles.skillTrack}>
-        <div
-          className={styles.skillFill}
-          style={{ width: visible ? `${level}%` : '0%' }}
-        />
-      </div>
-    </div>
-  )
-}
+const categories = [
+  "Product development",
+  "UI/UX implementation",
+  "Full-stack development",
+  "Web applications",
+  "Dashboards",
+  "Internal tools",
+  "Mobile applications",
+  "API integrations",
+];
 
 export default function About() {
-  const ref = useRef(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect() } },
-      { threshold: 0.2 }
-    )
-    if (ref.current) obs.observe(ref.current)
-    return () => obs.disconnect()
-  }, [])
-
   return (
-    <section id="about" className={styles.about} ref={ref}>
-      <div className={styles.inner}>
-
-        {/* Left col — text */}
-        <div className={`${styles.textCol} ${visible ? styles.visible : ''}`}>
-          <p className={styles.label}>About Me</p>
-          <h2 className={styles.heading}>
-            A developer who codes<br />
-            <em>with purpose.</em>
+    <section id="about" className="py-24 md:py-32 border-t border-line">
+      <div className="max-w-content mx-auto px-6 grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span className="section-label">✦ About</span>
+          <h2 className="mt-4 font-extrabold text-dark text-3xl md:text-4xl tracking-tight leading-tight">
+            More than just
+            <br />
+            shipping code.
           </h2>
-          <p className={styles.body}>
-            I'm a dedicated software developer completing my Bachelor's
-            degree in Informatics. My focus lies in JavaScript ecosystems —
-            specifically building robust full-stack applications using
-            MongoDB, Express, React, and Node.js.
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <p className="text-[17px] leading-relaxed text-dark/80">
+            I'm a dedicated full-stack developer completing my degree in
+            Informatics, focused on turning ideas into digital products people
+            actually use — not just demos that look good in a portfolio.
           </p>
-          <p className={styles.body}>
-            Balancing my final-year thesis with independent development
-            projects has taught me strong <strong>time management</strong>,{' '}
-            <strong>self-motivation</strong>, and{' '}
-            <strong>problem-solving</strong> — traits that make me highly
-            effective in remote, autonomous work environments.
+          <p className="mt-4 text-[17px] leading-relaxed text-dark/80">
+            I help startups and small businesses design and build websites,
+            web apps, dashboards, and internal tools using the MERN stack —
+            keeping things simple, fast, and production-ready.
           </p>
 
-          {/* Stats */}
-          <div className={styles.stats}>
-            <div className={styles.stat}>
-              <span className={styles.statNum}>2+</span>
-              <span className={styles.statLabel}>Projects shipped</span>
-            </div>
-            <div className={styles.stat}>
-              <span className={styles.statNum}>8th</span>
-              <span className={styles.statLabel}>Semester (final year)</span>
-            </div>
-            <div className={styles.stat}>
-              <span className={styles.statNum}>∞</span>
-              <span className={styles.statLabel}>Remote-ready</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Right col — skills */}
-        <div className={`${styles.skillsCol} ${visible ? styles.visible : ''}`}>
-          <p className={styles.label}>Core Skills</p>
-          <div className={styles.skills}>
-            {skills.map(s => (
-              <SkillBar key={s.name} {...s} visible={visible} />
+          <div className="mt-8 flex flex-wrap gap-2.5">
+            {categories.map((c) => (
+              <span
+                key={c}
+                className="text-sm font-medium text-dark/70 bg-white border border-line rounded-full px-4 py-2"
+              >
+                {c}
+              </span>
             ))}
           </div>
 
-          {/* Tool icons row */}
-          <div className={styles.tools}>
-            {['Git & GitHub', 'Tailwind CSS', 'Postman', 'VS Code', 'Figma'].map(t => (
-              <span key={t} className={styles.tool}>{t}</span>
-            ))}
+          <div className="mt-10 grid grid-cols-3 gap-6 pt-8 border-t border-line">
+            <div>
+              <p className="font-extrabold text-3xl text-dark">2+</p>
+              <p className="text-sm text-muted mt-1">Projects shipped</p>
+            </div>
+            <div>
+              <p className="font-extrabold text-3xl text-dark">8th</p>
+              <p className="text-sm text-muted mt-1">Final semester</p>
+            </div>
+            <div>
+              <p className="font-extrabold text-3xl text-dark">∞</p>
+              <p className="text-sm text-muted mt-1">Remote-ready</p>
+            </div>
           </div>
-        </div>
-
+        </motion.div>
       </div>
     </section>
-  )
+  );
 }

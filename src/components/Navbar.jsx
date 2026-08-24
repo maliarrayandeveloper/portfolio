@@ -1,23 +1,23 @@
-import { useState, useEffect } from "react";
-import styles from "./Navbar.module.css";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 const links = [
+  { label: "Work", id: "work" },
+  { label: "Process", id: "process" },
   { label: "About", id: "about" },
-  { label: "Projects", id: "projects" },
-  { label: "Process", id: "how-it-works" },
   { label: "FAQ", id: "faq" },
-  { label: "Contact", id: "contact" },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   const scrollTo = (id) => {
     setMenuOpen(false);
@@ -25,73 +25,83 @@ export default function Navbar() {
   };
 
   return (
-    <header className={`${styles.nav} ${scrolled ? styles.scrolled : ""}`}>
-      <a
-        href="#"
-        className={styles.logo}
-        onClick={(e) => {
-          e.preventDefault();
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }}
+    <>
+      <motion.header
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-[530px]"
       >
-        <span className={styles.logoName}>Ali Arrayyan</span>
-        <span className={styles.logoDot}>.</span>
-      </a>
-
-      {/* Desktop links */}
-      <nav className={styles.links}>
-        {links.map((l) => (
-          <button
-            key={l.id}
-            className={styles.link}
-            onClick={() => scrollTo(l.id)}
-          >
-            {l.label}
-          </button>
-        ))}
-        <a
-          href="https://drive.google.com/file/d/1E0sQJ7X7dK3KCtjXy6afHzkDKTxrdWYv/view?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.cta}
-        >
-          Download CV ↗
-        </a>
-      </nav>
-
-      {/* Mobile hamburger */}
-      <button
-        className={`${styles.hamburger} ${menuOpen ? styles.open : ""}`}
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Toggle menu"
-      >
-        <span />
-        <span />
-        <span />
-      </button>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className={styles.mobileMenu}>
-          {links.map((l) => (
-            <button
-              key={l.id}
-              className={styles.mobileLink}
-              onClick={() => scrollTo(l.id)}
-            >
-              {l.label}
-            </button>
-          ))}
+        <div className="flex items-center justify-between h-14 px-3 pl-5 rounded-full bg-white/90 backdrop-blur-md shadow-soft border border-line">
           <a
-            href="https://drive.google.com/file/d/1E0sQJ7X7dK3KCtjXy6afHzkDKTxrdWYv/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.mobileCta}
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className="font-extrabold text-dark text-lg tracking-tight"
           >
-            Download CV ↗
+            adib<span className="text-orange">.</span>
           </a>
+
+          <nav className="hidden md:flex items-center gap-1">
+            {links.map((l) => (
+              <button
+                key={l.id}
+                onClick={() => scrollTo(l.id)}
+                className="px-3 py-2 text-sm font-medium text-dark/70 hover:text-dark transition-colors"
+              >
+                {l.label}
+              </button>
+            ))}
+          </nav>
+
+          <div className="hidden md:block">
+            <button
+              onClick={() => scrollTo("contact")}
+              className="inline-flex items-center rounded-full bg-orange text-white text-sm font-semibold px-4 py-2 hover:-translate-y-0.5 hover:scale-[1.03] transition-transform"
+            >
+              Let's Talk
+            </button>
+          </div>
+
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            className="md:hidden w-9 h-9 flex items-center justify-center rounded-full text-dark"
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
-      )}
-    </header>
+      </motion.header>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}
+            className="fixed top-[76px] left-1/2 -translate-x-1/2 z-40 w-[calc(100%-2rem)] max-w-[400px] rounded-3xl bg-white shadow-lift border border-line p-3 md:hidden"
+          >
+            {links.map((l) => (
+              <button
+                key={l.id}
+                onClick={() => scrollTo(l.id)}
+                className="block w-full text-left px-4 py-3 rounded-2xl text-dark font-medium hover:bg-bg transition-colors"
+              >
+                {l.label}
+              </button>
+            ))}
+            <button
+              onClick={() => scrollTo("contact")}
+              className="mt-1 block w-full text-center rounded-2xl bg-orange text-white font-semibold px-4 py-3"
+            >
+              Let's Talk
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

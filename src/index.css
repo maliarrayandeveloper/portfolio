@@ -1,159 +1,54 @@
-/* ============================================
-   GLOBAL STYLES & DESIGN TOKENS
-   ============================================ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-*, *::before, *::after {
+* {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root {
-  /* Colors — Light mode */
-  --bg-base:       #F5F3EF;
-  --bg-surface:    #EDEAE3;
-  --bg-card:       #FFFFFF;
-  --text-primary:  #1A1917;
-  --text-secondary:#5C5A56;
-  --text-muted:    #9A9893;
-  --border:        rgba(26,25,23,0.12);
-  --border-strong: rgba(26,25,23,0.22);
-  --accent:        #1A1917;
-  --accent-inv:    #F5F3EF;
-  --green-bg:      #E8F5EE;
-  --green-text:    #1A6B3A;
-  --blue-bg:       #E8F0FB;
-  --blue-text:     #1A4BA0;
-
-  /* Typography */
-  --font-display: 'Instrument Serif', Georgia, serif;
-  --font-body:    'Geist', system-ui, sans-serif;
-
-  /* Spacing */
-  --nav-h: 60px;
-  --section-gap: 6rem;
-
-  /* Transitions */
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-base:       #141412;
-    --bg-surface:    #1E1D1A;
-    --bg-card:       #252420;
-    --text-primary:  #F0EDE6;
-    --text-secondary:#A8A49C;
-    --text-muted:    #6A6762;
-    --border:        rgba(240,237,230,0.10);
-    --border-strong: rgba(240,237,230,0.20);
-    --accent:        #F0EDE6;
-    --accent-inv:    #141412;
-    --green-bg:      #0F2E1A;
-    --green-text:    #5CBA7D;
-    --blue-bg:       #0F1E3A;
-    --blue-text:     #6EA3F5;
-  }
 }
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
 }
 
 body {
-  background-color: var(--bg-base);
-  color: var(--text-primary);
-  font-family: var(--font-body);
-  font-weight: 400;
-  line-height: 1.6;
+  background-color: #F9F7F2;
+  color: #171627;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  cursor: none;
 }
 
-/* ---- CUSTOM CURSOR ---- */
-.cursor {
-  position: fixed;
-  top: 0; left: 0;
-  width: 10px; height: 10px;
-  background: var(--text-primary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.15s var(--ease), background 0.15s;
-  transform: translate(-50%, -50%);
-}
-
-.cursor.hovering {
-  transform: translate(-50%, -50%) scale(3);
-  background: transparent;
-  border: 1.5px solid var(--text-primary);
-}
-
-/* ---- SELECTION ---- */
 ::selection {
-  background: var(--text-primary);
-  color: var(--bg-base);
+  background: #171627;
+  color: #F9F7F2;
 }
 
-/* ---- SCROLLBAR ---- */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg-base); }
-::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 99px; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F9F7F2; }
+::-webkit-scrollbar-thumb { background: rgba(23,22,39,0.18); border-radius: 99px; }
 
-/* ---- FADE-IN ANIMATION ---- */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+img { display: block; max-width: 100%; }
+
+/* Reusable pill label, e.g. "✦ SELECTED WORK" */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5267E8;
+  background: #E9D8FF;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-
-@keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(26,107,58,0.4); }
-  50%       { box-shadow: 0 0 0 5px rgba(26,107,58,0); }
-}
-
-@media (prefers-color-scheme: dark) {
-  @keyframes pulse-dot {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(92,186,125,0.4); }
-    50%       { box-shadow: 0 0 0 5px rgba(92,186,125,0); }
-  }
-}
-
-.animate-fadeup {
-  animation: fadeUp 0.7s var(--ease) both;
-}
-
-/* Stagger delays */
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
-.delay-5 { animation-delay: 0.55s; }
-.delay-6 { animation-delay: 0.7s; }
-
-/* ---- UTILITY ---- */
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font-family: var(--font-body);
-  cursor: none;
-}
-
-img {
-  display: block;
-  max-width: 100%;
+/* Decorative blob */
+.blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(60px);
+  pointer-events: none;
 }
